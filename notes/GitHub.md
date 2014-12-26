@@ -8,6 +8,8 @@
 	Password for 'https://lplin@github.com': 8l
 	Everything up-to-date
 
+# Without [username](http://stackoverflow.com/questions/6565357/git-push-requires-username-and-password)
+	git remote set-url origin https://lplin@github.com/lplin/scm-test1.git
 
 # [Stash](http://git-scm.com/book/en/Git-Tools-Stashing)
 - To push a new stash onto your stack, run:	`$ git stash`
