@@ -2,11 +2,12 @@
 -	[scm-test1](https://github.com/lplin/scm-test1): liping.ln@gmail.com:8la
 - [ext001](https://github.com/nature-tech/ext001): liping.lin.us@gmail.com:8la
 -	[elevator](https://github.com/liping-lin/elevator): liping.lin.us@gmail.com:8la
-
+```bash
 	lplin@dlm47 ~/gits/lplin/scm-test1 $ git push origin master
 	Username for 'https://github.com': lplin
 	Password for 'https://lplin@github.com': 8l
 	Everything up-to-date
+```
 
 # Without [username](http://stackoverflow.com/questions/6565357/git-push-requires-username-and-password)
 	git remote set-url origin https://lplin@github.com/lplin/scm-test1.git
