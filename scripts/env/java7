@@ -1,0 +1,2 @@
+export JAVA_HOME=/home/lplin/apps/jdk1.7.0_71
+export PATH=$JAVA_HOME/bin:$PATH
