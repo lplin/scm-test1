@@ -1,7 +1,7 @@
 # Zip [with password](http://www.techiestuffs.com/how-zip-unzip-files-via-commandline-linux/) 
-$ zip -P 8888 hr.zip rdc-hr.md
-$ zip -e ../notes.zip Note1.md
-$ unzip -P 8888 ../hr.zip
+	$ zip -P 123 hr.zip rdc-hr.md
+	$ zip -e ../notes.zip Note1.md
+	$ unzip -P 123 ../hr.zip
 
 # VI [Better colors for syntax highlighting](http://vim.wikia.com/wiki/Better_colors_for_syntax_highlighting)
 If you have a black background, use the following command to get a better color map for syntax highlighting:
