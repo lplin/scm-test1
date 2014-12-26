@@ -79,7 +79,23 @@ posts.json:
 		}
 	}
 	curl -XPOST 'http://localhost:9200/posts' -d @posts.json
-
+	==>
+	{"error":"MapperParsingException[mapping [post]]; nested: IllegalArgumentException[precisionStep must be >= 1 (got 0)]; ","status":400}
+	==> Remove them all
+	{
+		"mappings": {
+			"post": {
+				"properties": {
+					"id": {"type":"long", "store":"yes" },
+					"name": {"type":"string", "store":"yes", "index":"analyzed" },
+					"published": {"type":"date", "store":"yes" },
+					"contents": {"type":"string", "store":"no", "index":"analyzed" }
+				}
+			}
+		}
+	}
+	{"acknowledged":true}
+	
 #	
 
 
