@@ -1,3 +1,6 @@
+# Best [compression method](http://askubuntu.com/questions/236598/best-compression-method)
+	 sudo apt-get install p7zip-full
+
 # Zip [with password](http://www.techiestuffs.com/how-zip-unzip-files-via-commandline-linux/) 
 	$ zip -P 123 hr.zip rdc-hr.md
 	$ zip -e ../notes.zip Note1.md

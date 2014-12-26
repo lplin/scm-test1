@@ -143,7 +143,12 @@ Settings > Display > Remote Display
 	sudo add-apt-repository ppa:thefanclub/grive-tools
 	sudo apt-get update
 	sudo apt-get install grive-tools
-	
+
+# Change Grive Home	
+	/opt/thefanclub/grive-tools
+	./grive-setup:48:googleDriveFolder="$userHome/Google Drive"	
+	./grive-indicator:886:  googleDrive = "Google Drive"
+
 # gnome-panel
 	sudo apt-get install gnome-panel
 
