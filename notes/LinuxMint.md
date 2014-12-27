@@ -1,3 +1,21 @@
+# List available versions:
+	dpkg -l
+	$ aptitude versions pidgin
+
+	$ apt-cache policy pidgin
+
+	$ apt-cache madison pidgin
+		pidgin | 1:2.10.10-1ubuntu0+pidgin9.14.04 | http://ppa.launchpad.net/pidgin-developers/ppa/ubuntu/ trusty/main amd64 Packages
+		pidgin | 1:2.10.9-0ubuntu3.2 | http://archive.ubuntu.com/ubuntu/ trusty-updates/main amd64 Packages
+		pidgin | 1:2.10.9-0ubuntu3.2 | http://security.ubuntu.com/ubuntu/ trusty-security/main amd64 Packages
+		pidgin | 1:2.10.9-0ubuntu3 | http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+		 
+	$ sudo apt-get install pidgin-data=1:2.10.9-0ubuntu3
+	$ sudo apt-get install pidgin=1:2.10.9-0ubuntu3
+
+# Install [Empathy](http://community.linuxmint.com/software/view/empathy)
+- Need to install [telepathy-gabble: XMPP/Jabber support](https://bbs.archlinux.org/viewtopic.php?id=98273) as well
+
 # Install [Gedit 3](http://forums.linuxmint.com/viewtopic.php?f=47&t=117673)
 	sudo apt-get purge gedit
 	sudo apt-get purge gedit-common
