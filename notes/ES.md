@@ -1109,12 +1109,262 @@ the preceding equation:
 - The smaller the document fields are, the higher the score the document will have.
 - The higher the boost for fields is, the higher the score the document will have.
 - As we can see, Lucene will give the higher score to the documents that have the highest number of query terms matched in the document contents and have shorter fields (less terms indexed). Also, rarer terms will be favored instead of the common ones.
+## Language
+	curl -XGET 'localhost:9200/docs/_search?pretty=true ' -d '{
+		"query": {
+		  "bool": {
+		    "minimum_should_match": 1,
+		    "should": [
+		      {
+		        "match": {
+		          "content": {
+		            "query": "documents",
+		            "analyzer": "english"
+		          }
+		        }
+		      },
+		      {
+		        "match": {
+		          "content.default": {
+		            "query": "documents",
+		            "analyzer": "simple"
+		          }
+		        }
+		      }
+		    ]
+		  }
+		}
+	}'
 
+## The boost
+### Field boost
+	{
+		"query": {
+		  "query_string": {
+		    "fields": [
+		      "from^5",
+		      "to^10",
+		      "subject"
+		    ],
+		    "query": "john",
+		    "use_dis_max": false
+		  }
+		}
+	}
 
+	{
+		"query": {
+		  "bool": {
+		    "should": {
+		      "term"{
+		        "term"{
+		          "term"
+		        ]
+		      }
+		    }[
+		      : {
+		        "from": {
+		          "value": "john",
+		          "boost": 5
+		        }
+		      }
+		    },
+		    : {
+		      "to": {
+		        "value": "john",
+		        "boost": 10
+		      }
+		    }
+		  },
+		  : {
+		    "subject": {
+		      "value": "john"
+		    }
+		  }
+		}
+	}
 
+We see that the most important field is the to field,
+and the from field is less important. The subject field has a default value for boost ,
+which is 1.0 . Always remember that this value is only one of the various factors.
 
+### The boosting query
+	{
+		"query": {
+		  "boosting": {
+		    "positive": {
+		      "term": {
+		        "available": true
+		      }
+		    },
+		    "negative": {
+		      "match": {
+		        "author": "remarque"
+		      }
+		    },
+		    "negative_boost": 0.1
+		  }
+		}
+	}
 
+books written by E. M. Remarque will have a score that is 10 times lower
 
+### The function_score query
+	{
+		"query": {
+		  "function_score": {
+		    "query": {
+		      ...
+		    },
+		    "filter": {
+		      ...
+		    },
+		    "functions": [
+		      {
+		        "filter": {
+		          ...
+		        },
+		        "FUNCTION": {
+		          ...
+		        }
+		      }
+		    ],
+		    "boost_mode": " ... ",
+		    "score_mode": " ... ",
+		    "max_boost": " ... ",
+		    "boost": " ... "
+		  }
+		}
+	}
+
+### index-time boosting
+	{
+		"title": "The Complete Sherlock Holmes",
+		"author": {
+		  "_value": "Arthur Conan Doyle",
+		  "_boost": 10.0,
+		  
+		},
+		"year": 1936
+	}
+
+	{
+		"mappings": {
+		  "book": {
+		    "properties": {
+		      "title": {
+		        "type": "string"
+		      },
+		      "author": {
+		        "type": "string",
+		        "boost": 10.0
+		      }
+		    }
+		  }
+		}
+	}
+
+### The synonym filter
+	{
+		"index": {
+		  "analysis": {
+		    "analyzer": {
+		      "synonym": {
+		        "tokenizer": "whitespace",
+		        "filter": [
+		          "synonym"
+		        ]
+		      }
+		    },
+		    "filter": {
+		      "synonym": {
+		        "type": "synonym",
+		        "ignore_case": true,
+		        "synonyms": [
+		          "crime => criminality"
+		        ]
+		      }
+		    }
+		  }
+		}
+	}
 	
+	"filter": {
+		"synonym": {
+		  "type": "synonym",
+		  "synonyms_path": "synonyms.txt"
+		}
+	}
+	*. the specified file path should be relative to the Elasticsearch config directory
+	
+### Explicit synonyms
+	criminality => crime
+	abuse => punishment
+	star wars, wars => starwars
+
+means that star wars and wars will be changed to starwars by the synonym filter.
+
+### Equivalent synonyms
+	star, wars, star wars, starwars
+
+### Expanding synonyms
+	"filter": {
+		"synonym": {
+		  "type": "synonym",
+		  "expand": false,
+		  "synonyms": [
+		    "one, two, three"
+		  ]
+		}
+	}
+
+Elasticsearch will map the preceding synonym definition to the following:
+
+	one, two, thee => one
+
+However, if we set the expand property to true , the same synonym definition will be interpreted in the following way: 
+
+	one, two, three => one, two, three
+
+This basically means that each of the words from the left-hand side of the definition will be expanded to all the words on the right-hand side.
+
+### Explaining the query
+{
+  "_index": "library",
+  "_type": "book",
+  "_id": "1",
+  "matched": true,
+  "explanation": {
+    "value": 0.057534903,
+    "description": "weight(_all:quiet in 0) [PerFieldSimilarity], result of:",
+    "details": [
+      {
+        "value": 0.057534903,
+        "description": "fieldWeight in 0, product of:",
+        "details": [
+          {
+            "value": 1.0,
+            "description": "tf(freq=1.0), with freq of:",
+            "details": [
+              {
+                "value": 1.0,
+                "description": "termFreq=1.0"
+              }
+            ]
+          },
+          {
+            "value": 0.30685282,
+            "description": "idf(docFreq=1, maxDocs=1)"
+          },
+          {
+            "value": 0.1875,
+            "description": "fieldNorm(doc=0)"
+          }
+        ]
+      }
+    ]
+  }
+}
+
 
 

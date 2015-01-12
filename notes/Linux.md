@@ -1,3 +1,20 @@
+# List Open [Files for Process](http://www.cyberciti.biz/faq/howto-linux-get-list-of-open-files/)
+
+$ ps -aef | grep httpd
+
+
+lsof -p 1879
+lsof: WARNING: can't stat() fuse.gvfsd-fuse file system /run/user/1000/gvfs
+      Output information may be incomplete.
+COMMAND  PID  USER   FD   TYPE             DEVICE SIZE/OFF    NODE NAME
+mysqld  1879 mysql  cwd    DIR                8,6     4096  143580 /var/lib/mysql
+
+
+To list opne files for firefox process, enter:
+$ ls -l /proc/7857/fd
+
+dlm47 proc # find -name 'fd'
+
 # Best [compression method](http://askubuntu.com/questions/236598/best-compression-method)
 	 sudo apt-get install p7zip-full
 
