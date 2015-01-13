@@ -1,3 +1,8 @@
+# traceroute alternative
+Suggestion ; use the mtr command , it's way better !  8) 
+mtr linuxmint.com
+
+
 # List Open [Files for Process](http://www.cyberciti.biz/faq/howto-linux-get-list-of-open-files/)
 
 $ ps -aef | grep httpd
