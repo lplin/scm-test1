@@ -90,5 +90,6 @@ ntp       8964     1  0 Jan06 ?        00:00:01 ntpd -u ntp:ntp -p /var/run/ntpd
 # ReplicationValve [Filter](http://tomcat.apache.org/tomcat-8.0-doc/config/cluster-valve.html)
 For known file extensions or urls, you can use this Valve to notify the cluster that the session has not been modified during this request and the cluster doesn't have to probe the session managers for changes. If the request matches this filter pattern, the cluster assumes there has been no session change. An example filter would look like filter=".*\.gif|.*\.js|.*\.jpeg|.*\.jpg|.*\.png|.*\.htm|.*\.html|.*\.css|.*\.txt" . The filter is a regular expression using java.util.regex.
 
+# Apache [mod_proxy](http://httpd.apache.org/docs/trunk/mod/mod_proxy_balancer.html)
 
 
