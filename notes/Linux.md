@@ -1,3 +1,7 @@
+# Backup SVN changed files
+$ svn st | awk '{ print $2}' | grep src | grep -v '/resources' | xargs -I f1 cp --parents f1 ~/tmp/tt
+
+
 # traceroute alternative
 Suggestion ; use the mtr command , it's way better !  8) 
 mtr linuxmint.com

@@ -1,3 +1,9 @@
+# Filter
+
+CMF, WU watched by me: watcher in (currentUser()) AND project in (CMF, WU) ORDER BY updatedDate DESC
+Release Watched: labels in ("release-7.1", "release-7.1-top") AND watcher in (currentUser()) AND project in (CMF, WU) ORDER BY updatedDate DESC
+
+
 # [GreenHopper](http://confluence.atlassian.com/display/GH/GreenHopper+Documentation)
 	https://my.atlassian.com/products/index pingnet888@gmail.com: 8x8
 	# http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-5.0.2-x64.bin

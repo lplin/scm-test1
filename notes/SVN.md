@@ -1,3 +1,6 @@
+# # Backup SVN changed files
+$ svn st | awk '{ print $2}' | grep src | grep -v '/resources' | xargs -I f1 cp --parents f1 ~/tmp/tt
+
 # SVN propedit
 	svn propedit svn:ignore .
 	When you run that command svn will open your text editor, and this is where you can define patterns or specific files to ignore. If you place a * in the property file,
