@@ -1,3 +1,63 @@
+# Find files in some dirs
+	find -type d -name '2015012*' | xargs -I{} find {} -iname '*RIP*.xml'
+	==> better performance
+	ls -d 2015012* | xargs -I{} find {} -iname '*FRX*.xml'
+
+
+# Display binary file with ASCII
+	$ hexdump -C t3.doc
+
+# SSH login without password [...](http://www.linuxproblem.org/art_9.html)
+	$ ssh-keygen -t rsa (Do not enter a passphrase, only one time for the host from)
+	$ ssh b@B mkdir -p .ssh ( if no this dir)
+	$ cat ~/.ssh/id_rsa.pub | ssh b@B 'cat >> .ssh/authorized_keys' 
+
+	Test OK:
+	$ cat ~/.ssh/id_rsa.pub | ssh s1-dlapp08 'cat >> .ssh/authorized_keys'
+	$ cat ~/.ssh/id_rsa.pub | ssh s1-dlapp07 'cat >> .ssh/authorized_keys'
+	
+
+# copy file content to clipboard from the command line on Linux desktop: [...](http://ask.xmodulo.com/copy-file-content-clipboard-linux-desktop.html)
+	$ cat input.txt | xclip -i
+
+Once the file content is copied to clipboard, you can paste it into another window or application simply by clicking on mouse `middle-button`.
+
+# find files that are bigger/smaller than x bytes? [...](http://superuser.com/questions/204564/how-can-i-find-files-that-are-bigger-smaller-than-x-bytes)
+	find . -type f -size -4096c
+	-size n[cwbkMG]
+		  `b'    for 512-byte blocks (this is the default if no suffix  is
+		  `c'    for bytes
+		  `w'    for two-byte words
+		  `k'    for Kilobytes       (units of 1024 bytes)
+		  `M'    for Megabytes    (units of 1048576 bytes)
+		  `G'    for Gigabytes (units of 1073741824 bytes)
+
+# Replace string while without touching timestamp
+find . -iname '*.xml' | while read f; do
+	ts=`stat -c "%Y" $f`
+ 	sed -i 's/RD09000P/RD03000T/g' $f
+ 	touch -d @$ts $f
+done
+
+
+# Replace biz_unit_id in files:
+$ find -iname '*.xml' -exec sed -i 's/RD09000P/RD03000T/g' {} \;
+
+# Howto: [Linux Rename Multiple Files](http://www.cyberciti.biz/tips/renaming-multiple-files-at-a-shell-prompt.html)
+	rename "s/RD09000P/RD03000T/g" *.xml
+
+Do it [recursively](http://unix.stackexchange.com/questions/37355/recursively-rename-subdirectories-that-match-a-regex):
+
+	lplin@dlm47 ~/rdc/jiras/CMF-725_EU/RD03000T/orig $ find . -iname '*.xml' -exec rename -n 's/RD09000P/RD03000T/g' {} ";"
+
+If rename -n (-not really) displays what it wants to do, and it's all right for you, omit the -n and make it happen.
+
+
+
+# Use grep to [show just filenames](http://stackoverflow.com/questions/6637882/how-can-i-use-grep-to-show-just-filenames-no-in-line-matches-on-linux)
+
+There is a standard option grep -l (that is a lowercase L) which does this. You also do not need -H in this case.
+
 # Backup SVN changed files
 $ svn st | awk '{ print $2}' | grep src | grep -v '/resources' | xargs -I f1 cp --parents f1 ~/tmp/tt
 
