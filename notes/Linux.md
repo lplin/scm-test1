@@ -1,3 +1,50 @@
+# Determine whether a variable is already defined [Ref](http://mywiki.wooledge.org/BashFAQ/083)
+
+[ "$var" ]
+[[ $var ]]
+
+if [[ -v var ]]; then echo "var is defined"; fi
+
+# Replace new line ( \n ) with space or Tab
+$ cat | tr '\t' '\n'
+cat | sed -e 's/\t/\n/g' 
+
+# Single quote strings
+cat | awk '{print "'\''" $1 "'\''"}'
+cat | awk '{print "\x27" $1 "\x27"}'
+
+# Bash: [Check if array element exists](http://www.fvue.nl/wiki/Bash:_Check_if_array_element_exists)
+function in_array() {
+    local hay needle=$1
+    shift
+    for hay; do
+        [[ $hay == $needle ]] && return 0
+    done
+    return 1
+}
+Tests:
+
+$ aa=(foo bar "cee dee" eek "2 3" 34 4)
+$ in_array bar "${aa[@]}" && echo yes || echo no
+yes
+$ in_array cee       "${aa[@]}" && echo yes || echo no
+no
+
+In Bash 4, you can use [associative arrays](http://superuser.com/questions/195598/test-if-element-is-in-array-in-bash):
+
+ if condition - check if element is present in array
+http://stackoverflow.com/questions/14366390/bash-if-condition-check-if-element-is-present-in-array
+array=(word "two words" words)
+[[ ${array[@]} =~ words ]] && echo "in" || echo "out"
+
+if [[ ${array[@]} =~ words ]]
+
+
+if [[ " ${arr[*]} " == *" d "* ]]; then
+    echo "arr contains d"
+fi
+
+
 # Find files in some dirs
 	find -type d -name '2015012*' | xargs -I{} find {} -iname '*RIP*.xml'
 	==> better performance
