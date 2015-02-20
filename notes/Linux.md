@@ -1,3 +1,9 @@
+# UTF16 to UTF8
+lplin@dlm47 /tmp/c6 $ file Personsample.txt 
+Personsample.txt: Little-endian UTF-16 Unicode text, with CRLF, CR line terminators
+lplin@dlm47 /tmp/c6 $ iconv -f UTF-16LE -t UTF-8 < Person_legacy.txt > Person_legacy1.txt
+
+
 # Determine whether a variable is already defined [Ref](http://mywiki.wooledge.org/BashFAQ/083)
 
 [ "$var" ]

@@ -1,3 +1,66 @@
+# GRANT 
+mysql> GRANT ALL ON c6.* TO 'rdcapp';
+(GRANT ALL ON c6.* TO 'rdcapp'@'localhost';) is too strict.
+
+# Migrating Unicode Data From [MSSQL to MySQL](http://www.wolflabs.org/2012/08/09/migrating-unicode-data-from-mssql-to-mysql/)
+
+$ bcp "select '**BOL**', u.* from absynth.dbo.user u;" queryout "C:\tmp\user.csv.dump" -w -CRAW -t"**EOT**" -r"***EOL***" -S localhost -U "absynth" -P "peanutbutter"<br /> 
+$ iconv -f UTF-16LE -t UTF-8 < "C:\tmp\user.csv.dump" > "C:\tmp\user.csv" 
+$ del "C:\tmp\user.csv.dump" 
+$ mysql -h localhost -u absynth --password=cookies --execute="ALTER TABLE user DISABLE KEYS; LOAD DATA LOCAL INFILE 'C:\tmp\user.csv.dump' INTO TABLE user CHARACTER SET utf8 FIELDS TERMINATED BY '**EOT**' ENCLOSED BY '' ESCAPED BY '' LINES STARTING BY '**BOL****EOT**' TERMINATED BY '***EOL***'; ALTER TABLE user ENABLE KEYS;" --database=absynth 
+$ del "C:\tmp\user.csv"
+
+
+# Check version:
+SELECT @@version; -- s1-dlapp07: '5.0.95', dlm47: 5.6.21 
+SHOW VARIABLES LIKE "%version%";
+
+LOAD DATA INFILE '/tmp/c6/Person_legacy.csv'
+INTO TABLE person_legacy
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES;
+
+
+# Import
+LOAD DATA INFILE '/tmp/c6/Person_legacy.csv'
+INTO TABLE person_legacy
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+LOAD DATA INFILE '/tmp/c6/Person_legacy.csv'
+INTO TABLE person_legacy
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+# UTF8 [Character Set and Collation](http://dev.mysql.com/doc/refman/5.0/en/charset-applications.html)
+CREATE DATABASE mydb
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+utf8_general_ci is somewhat faster than utf8_unicode_ci, but less accurate (for sorting). The specific language utf8 encoding (such as utf8_swedish_ci) contain additional language rules that make them the most accurate to sort for those languages. Most of the time I use utf8_unicode_ci (I prefer accuracy to small performance improvements), unless I have a good reason to prefer a specific language. (http://stackoverflow.com/questions/367711/what-is-the-best-collation-to-use-for-mysql-with-php)
+
+
+
+# Table info to SELECT
+cat | awk '{print $1}' | tr '\n' ', ' | sed -e 's/,/, /g' ==> tr still output ',' because of char based
+cat | awk '{print $1}' | sed -e 's/\n/, /g' ==> doesn't work because line by line, instead of char
+cat | awk '{print $1}' | tr '\n' '\t' | sed -e 's/\t/, /g' 
+
+BusinessID	varchar(255)
+NAID	varchar(255)
+LegalName	varchar(255)
+DBAName	varchar(255)
+AddressLine1	varchar(255)
+==>
+BusinessID, NAID, LegalName, DBAName, AddressLine1, AddressLine2, AddressLine3, AddressLine4, AddressLine5, AddressLine6, PostCode, Country, ApprovalSent, OwnershipType, BusinessType, Department,
+
+
 # How to import a csv file into MySQL workbench?
 http://stackoverflow.com/questions/11429827/how-to-import-a-csv-file-into-mysql-workbench
 LOAD DATA LOCAL INFILE '/path/to/your/csv/file/model.csv' INTO TABLE test.dummy FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
