@@ -1,3 +1,6 @@
+# HTTP upload:
+	curl -F file=@RIB_INX_RD9000T_20150226_100002.xml http://w-tlapp02:4000/atlas/gridProcess?firmNumber=RD9000T
+
 # UTF16 to UTF8
 lplin@dlm47 /tmp/c6 $ file Personsample.txt 
 Personsample.txt: Little-endian UTF-16 Unicode text, with CRLF, CR line terminators

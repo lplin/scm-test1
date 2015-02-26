@@ -1,3 +1,7 @@
+# gedit hides mouse pointer when there is selected text [Ref](https://bugs.launchpad.net/ubuntu/+source/gedit/+bug/1376494)
+sudo apt-get install ibus-gtk
+sudo reboot
+
 # List available versions:
 	dpkg -l
 	$ aptitude versions pidgin
