@@ -1,3 +1,16 @@
+# How To Calculate The MySQL Database Size [Ref](http://www.mkyong.com/mysql/how-to-calculate-the-mysql-database-size/)
+	Here’s the SQL script to list out the entire databases size
+
+	SELECT table_schema "Data Base Name", SUM( data_length + index_length) / 1024 / 1024 
+	"Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema ;
+
+	Another SQL script to list out one database size, and each tables size in detail
+
+	SELECT TABLE_NAME, table_rows, data_length, index_length, 
+	round(((data_length + index_length) / 1024 / 1024),2) "Size in MB"
+	FROM information_schema.TABLES WHERE table_schema = "schema_name";
+
+
 # Remove the last comma
 	SET @val='Переулок Крапивный,5,';
 	SELECT IF(RIGHT(@val, 1)=',', LEFT(@val, CHAR_LENGTH(@val)-1), @val);
