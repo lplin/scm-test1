@@ -1,3 +1,6 @@
+# column to comma separated:
+$ awk -F'\t' '{print $4}' | tr '\n' '\t' | sed 's/\t/, /g'
+
 # HTTP upload:
 	curl -F file=@RIB_INX_RD9000T_20150226_100002.xml http://w-tlapp02:4000/atlas/gridProcess?firmNumber=RD9000T
 

@@ -1,3 +1,8 @@
+# Searching an issue which matches exactly the given words [From](https://answers.atlassian.com/questions/61004/searching-an-issue-which-matches-exactly-the-given-words)
+summary ~ "\"Jira is good\""
+
+# Performing Text Searches [see](https://confluence.atlassian.com/display/JIRA/Performing+Text+Searches)
+
 # Filter
 
 CMF, WU watched by me: watcher in (currentUser()) AND project in (CMF, WU) ORDER BY updatedDate DESC
