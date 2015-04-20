@@ -1,3 +1,41 @@
+Hi Sidney,
+
+Sorry just realized your message, having a very busy week. Apple is a world class top company and your teams sound great and hot. It is my great honor to learn the dream opportunities. 
+
+Except for next Tuesday (4/7), I can be available any day (whether week days or weekend) from 9am to 10pm EST with some unused paid time off days.
+
+My Skype id is: liping.lin.us and phone number is 215.272.2464. Let me know your best time and way of communication.
+
+Also looking forward to hearing from you and I promise will check my personal email very often from now on :) ,
+
+Li-Ping
+
+
+#  enable “beats audio” from within Linux? [Ans](http://askubuntu.com/questions/302340/is-there-a-way-to-enable-beats-audio-from-within-linux)
+Step 1: Install hda-jack-retask from here: https://launchpad.net/~diwic/+archive/hda (ppa:diwic/hda)
+
+Step 2: Open hda-jack-retask
+
+Step 3: Select the IDT 92HD91BXX codec (may be different on other models)
+
+Step 4: Check the "Show unconnected pins" box (the internal speakers do not show as connected)
+
+Step 5: Remap 0x0d (Internal Speaker, Front side) to "Internal speaker"
+
+Step 6: Remap 0x0f ("Not connected" but is the under-display speakers) to "Internal speaker"
+
+Step 7: Remap 0x10 ("Not connected" but is the subwoofer) to "Internal speaker (LFE)"
+
+Step 8: Apply now, then test with your favorite audio program (some may not work due to Pulse reset, so find one that does, verify sound is coming from all speakers).
+
+Step 9: If it works, select "Install boot override" to save the settings to apply at boot time.
+
+Step 10: Reboot. When it comes back, you should have full sound from all speakers. Also test headphones. Plugging in headphones should disable sound from all internal speakers.
+
+From Ubuntu 13.10, hda-jack-retask is part of alsa-tools. Just install the alsa-tools-gui package from the regular archive and start "hdajackretask".
+or 
+http://www.reddit.com/r/linux/comments/17sov5/howto_beats_audio_hp_laptop_speakers_on/
+
 # gedit hides mouse pointer when there is selected text [Ref](https://bugs.launchpad.net/ubuntu/+source/gedit/+bug/1376494)
 sudo apt-get install ibus-gtk
 sudo reboot
