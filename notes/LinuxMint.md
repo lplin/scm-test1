@@ -1,14 +1,67 @@
-Hi Sidney,
+# How to Update the Linux Kernel [...](https://delightlylinux.wordpress.com/2014/12/06/how-to-update-the-linux-kernel/)
 
-Sorry just realized your message, having a very busy week. Apple is a world class top company and your teams sound great and hot. It is my great honor to learn the dream opportunities. 
 
-Except for next Tuesday (4/7), I can be available any day (whether week days or weekend) from 9am to 10pm EST with some unused paid time off days.
+# For VMWare
+sudo apt-get install build-essential linux-headers-$(uname -r)
 
-My Skype id is: liping.lin.us and phone number is 215.272.2464. Let me know your best time and way of communication.
+# Intel 7260 wireless problems in Linux [...](http://bjarneo.codes/intel-7260-wireless-problems-linux/)
+driver: https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi
 
-Also looking forward to hearing from you and I promise will check my personal email very often from now on :) ,
+How to update the kernel:
+First check your kernel version
 
-Li-Ping
+1
+>> uname -r //3.13.0-24-generic
+Then update
+
+?
+1
+>> $ sudo apt-get install linux-image-3.16.0-37-generic linux-image-extra-3.16.0-37-generic
+Reading package lists... Do
+Reboot.
+
+Error! echo
+Your kernel headers for kernel 3.16.0-25-generic cannot be found at
+/lib/modules/3.16.0-25-generic/build or /lib/modules/3.16.0-25-generic/source.
+Error! echo
+Your kernel headers for kernel 3.16.0-25-generic cannot be found at
+/lib/modules/3.16.0-25-generic/build or /lib/modules/3.16.0-25-generic/source.
+run-parts: executing /etc/kernel/postinst.d/initramfs-tools 3.16.0-25-generic /boot/vmlinuz-3.16.0-25-generic
+update-initramfs: Generating /boot/initrd.img-3.16.0-25-generic
+Warning: No support for locale: en_US.utf8
+run-parts: executing /etc/kernel/postinst.d/pm-utils 3.16.0-25-generic /boot/vmlinuz-3.16.0-25-generic
+run-parts: executing /etc/kernel/postinst.d/zz-update-grub 3.16.0-25-generic /boot/vmlinuz-3.16.0-25-generic
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.16.0-25-generic
+Found initrd image: /boot/initrd.img-3.16.0-25-generic
+Found linux image: /boot/vmlinuz-3.13.0-24-generic
+Found initrd image: /boot/initrd.img-3.13.0-24-generic
+  No volume groups found
+Adding boot menu entry for EFI firmware configuration
+done
+
+
+Well.. Now my next issue is that I can’t get full Internet speed. I got 50/10 mbps, but it stops at 22/15 mpbs. I’ve tried every solution to fix this issue, but I can’t actually find anything that fixes this. If you know, please tell me!
+
+
+
+ modinfo iwlwifi | grep 7260
+firmware:       iwlwifi-7260-7.ucode
+
+
+# Wifi unstable [...](https://sites.google.com/site/easylinuxtipsproject/internet)
+
+sudo apt-get install linux-firmware-nonfree
+
+iwlwifi 0000:09:00.0: Detected Intel(R) Wireless N 7260, REV=0x144
+
+lplin@hp110nr ~ $ lspci -knn | grep -EiA2 net
+08:00.0 Ethernet controller [0200]: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller [10ec:8168] (rev 0c)
+	Subsystem: Hewlett-Packard Company Device [103c:190d]
+	Kernel driver in use: r8169
+09:00.0 Network controller [0280]: Intel Corporation Wireless 7260 [8086:08b1] (rev 73)
+	Subsystem: Intel Corporation Wireless-N 7260 [8086:4062]
+	Kernel driver in use: iwlwifi
 
 
 #  enable “beats audio” from within Linux? [Ans](http://askubuntu.com/questions/302340/is-there-a-way-to-enable-beats-audio-from-within-linux)
